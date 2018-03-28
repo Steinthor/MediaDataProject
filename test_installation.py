@@ -1,10 +1,21 @@
 # -*- coding: utf-8 -*-
-#
-#   Title:          Multimedia Data Formats
-#   Authors:        Philipp Brandauer
-#   Date:           27.03.2018
-#   Description:    Test all components needed for the project.
-#
+"""
+    Title:          Multimedia Data Formats
+    Authors:        Philipp Brandauer
+    Date:           28.03.2018
+    Description:    Test all components needed for the project:
+                    - OpenCV and ImageIO version
+                    - Reading (PNG, JPEG, JPEG2000, JPEG XR)
+                    - Writing (PNG, JPEG)
+                    - OpenCV (SIFT)
+                    
+    To Do:
+        1) How to read BPG (maybe first decompress and convert to png?)
+        2) How to use command line tools from python (subprocess?)
+        3) Warning when writing with imageio
+            (WARNING:root:imageio.freeimage warning: Could not determine tag type of 'XMLPacket'.)
+        4) 
+"""
 
 import cv2
 import imageio
@@ -37,6 +48,7 @@ axes[3].axis('off')
 plt.show()
 
 # Check image writing
+# Conclusion: For image conversion, don't use imageio. Use codec command line tools instead.
 #PNG:       https://imageio.readthedocs.io/en/latest/format_png-fi.html#png-fi
 #JPEG:      https://imageio.readthedocs.io/en/latest/format_jpeg-fi.html
 #JPEG2000:  https://imageio.readthedocs.io/en/latest/format_jp2-fi.html#jp2-fi
@@ -50,6 +62,11 @@ imageio.imwrite("data/test/out_test_jpeg2000.jp2", img_png, "JP2-FI")
 imageio.imwrite("data/test/out_test_jpegxr.jxr", img_png, "JPEG-XR-FI")
 
 
-
-
+# Check OpenCV and SIFT
+img_test = cv2.cvtColor(img_jpeg, cv2.COLOR_RGB2GRAY)
+sift = cv2.xfeatures2d.SIFT_create()
+(kps, descs) = sift.detectAndCompute(img_test, None)
+img_sift  = cv2.drawKeypoints(img_test, kps, None, color=(0,255,0), flags=0)
+plt.imshow(img_sift)
+plt.show()
 

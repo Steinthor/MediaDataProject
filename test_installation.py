@@ -49,10 +49,10 @@ plt.show()
 
 # Check image writing
 # Conclusion: For image conversion, don't use imageio. Use codec command line tools instead.
-#PNG:       https://imageio.readthedocs.io/en/latest/format_png-fi.html#png-fi
-#JPEG:      https://imageio.readthedocs.io/en/latest/format_jpeg-fi.html
-#JPEG2000:  https://imageio.readthedocs.io/en/latest/format_jp2-fi.html#jp2-fi
-#JPEG-XR:   https://imageio.readthedocs.io/en/stable/format_jpeg-xr-fi.html#jpeg-xr-fi
+# PNG:       https://imageio.readthedocs.io/en/latest/format_png-fi.html#png-fi
+# JPEG:      https://imageio.readthedocs.io/en/latest/format_jpeg-fi.html
+# JPEG2000:  https://imageio.readthedocs.io/en/latest/format_jp2-fi.html#jp2-fi
+# JPEG-XR:   https://imageio.readthedocs.io/en/stable/format_jpeg-xr-fi.html#jpeg-xr-fi
 kargs_png = {"compression": 9, "quantize": 200}
 kargs_jpeg = {"quality": 10}
 kargs_jp2 = {"FREE_IMAGE_SAVE_FLAGS":10}
@@ -66,7 +66,7 @@ imageio.imwrite("data/test/out_test_jpegxr.jxr", img_png, "JPEG-XR-FI")
 img_test = cv2.cvtColor(img_jpeg, cv2.COLOR_RGB2GRAY)
 sift = cv2.xfeatures2d.SIFT_create()
 (kps, descs) = sift.detectAndCompute(img_test, None)
-img_sift  = cv2.drawKeypoints(img_test, kps, None, color=(0,255,0), flags=0)
+img_sift = cv2.drawKeypoints(img_test, kps, None, color=(0, 255, 0), flags=0)
 plt.imshow(img_sift)
 plt.show()
 

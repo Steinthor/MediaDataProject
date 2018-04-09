@@ -14,10 +14,12 @@ import numpy as np
 
 plt.rcParams['image.cmap'] = 'gray'
 
-path = "data/load/"
-image_name = "beach_wood.png"
+image_name = "beach_wood"
+image_ending = ".png"
 
-img = imageio.imread((path+image_name))
+load_path = "data/load/"
+save_path = "data/save/"
+img = imageio.imread(load_path+image_name+image_ending)
 
 plt.imshow(img, vmin=0, vmax=255)
 plt.show()
@@ -64,4 +66,4 @@ subsampling = 0
 #qtables =
 
 kargs_jpeg = {"quality": quality, "progressive": progressive, "optimize": optimize, "dpi": dpi, "subsampling": subsampling}
-imageio.imwrite("data/save/jpg_test_001.jpg", img, "JPEG-PIL", **kargs_jpeg)
+imageio.imwrite(save_path+image_name+"_"+str(quality)+".jpg", img, "JPEG-PIL", **kargs_jpeg)

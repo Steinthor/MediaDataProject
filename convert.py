@@ -2,13 +2,17 @@
 """
     Title:          Multimedia Data Formats
     Date:           10.04.2018
-    Description:    
+    Description:    Convert-class containing all the methodes to convert 
+                    uncompressed images into JPEG/JPEG2000/JPEG XR/BPG 
+                    compressed files.
                     
     To Do:
-        1) 
+        1) JPEG2000
+        2) JPEG XR
+        3) BPG
 """
 
-from os import path
+from os import path, remove
 from numpy import linspace
 from imageio import imread, imwrite
 
@@ -27,22 +31,25 @@ class Convert:
         return None
         
     def convert_jpeg(self, in_list, compression_rates):
-        """convert_jpeg(filelist, compression_rates)
+        """convert_jpeg(in_list, compression_rates):
         Converts files JPEG format with given compression_rates.
         (Input format: PNG)
         
         Parameters:
             in_list:            List of all files to convert to jpeg format.
             compression_rates:  List of all targeted compression rates.
+            
+        Return:     Returns a list containing the filenames of the newly
+                    converted files.
         """
-        qualities = list(reversed(range(5, 100, 5)))    # quality range: [5 95]
+        qualities = list(reversed(range(1, 100, 3)))    # quality range: [5 95]
         out_list = [];
         
         for in_file in in_list:
             # Check if file is not present
             if self.check_file(self.path_in + in_file) != True:
                 break
-            img = imread(self.path_in + in_file, format='PNG-FI')
+            img = imread(self.path_in + in_file, format='BMP-FI')
             
             # Conversion
             for r in compression_rates:
@@ -59,7 +66,7 @@ class Convert:
                     if (r-1) <= rate <= (r+1):  
                         qualities = list(filter(lambda x: x <= q, qualities))     # Drop low quality levels
                         out_list.append(out_file)
-                        break;
+                        break
         return out_list
                     
 
@@ -71,20 +78,31 @@ class Convert:
         return 0
     
     def convert_bpg(self, in_list, compression_rates):
+        # TBD: Since libbpg does only support png images, one first needs to 
+        # convert the uncompressed images to PNG file format.
         return 0
     
     
     
     def check_file(self, filename):
+        """check_file(filename):
+        Checks if a file is present.
+        
+        Parameters:
+            filename:           Filename including path.
+        
+        Return:     Returns True if file is present, False otherwise.
+        """
         return path.exists(filename)
         
     def get_filesize(self, filename):
+        """get_filesize(filename):
+        Returns the size of a file.
+        
+        Parameters:
+            filename:           Filename including path.
+        
+        Return:     Returns filesize in bytes.
+        """
         return path.getsize(filename)
     
-    
-    
-# Test Functions
-c = Convert()
-files = ['test_png.png']
-rates = [10, 20, 30]
-c.convert_jpeg(files, rates)

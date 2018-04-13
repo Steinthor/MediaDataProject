@@ -20,13 +20,14 @@
 import cv2
 import imageio
 import matplotlib.pyplot as plt
+from convert import Convert
 
 # Check library versions 
 print(cv2.__version__)          # should be 3.4.1
 print(imageio.__version__)      # should be 2.3.0
 
 
-# Check image reading
+# Check image reading with imageio (FreeImage)
 img_png = imageio.imread("data/test/test_png.png", format="PNG-FI")
 img_jpeg = imageio.imread("data/test/test_jpeg.jpg", format="JPEG-FI")
 img_jp2 = imageio.imread("data/test/test_jpeg2000.jp2", format="JP2-FI")
@@ -61,7 +62,6 @@ imageio.imwrite("data/test/out_test_jpeg.jpg", img_png, "JPEG-FI", **kargs_jpeg)
 imageio.imwrite("data/test/out_test_jpeg2000.jp2", img_png, "JP2-FI")
 imageio.imwrite("data/test/out_test_jpegxr.jxr", img_png, "JPEG-XR-FI")
 
-
 # Check OpenCV and SIFT
 img_test = cv2.cvtColor(img_jpeg, cv2.COLOR_RGB2GRAY)
 sift = cv2.xfeatures2d.SIFT_create()
@@ -69,4 +69,3 @@ sift = cv2.xfeatures2d.SIFT_create()
 img_sift = cv2.drawKeypoints(img_test, kps, None, color=(0, 255, 0), flags=0)
 plt.imshow(img_sift)
 plt.show()
-

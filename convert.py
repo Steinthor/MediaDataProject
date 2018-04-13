@@ -7,9 +7,10 @@
                     compressed files.
                     
     To Do:
-        1) JPEG2000
-        2) JPEG XR
-        3) BPG
+        1) Problem with high compression rates in JPEG algorithm. 
+        2) JPEG2000
+        3) JPEG XR
+        4) BPG
 """
 
 from os import path, remove

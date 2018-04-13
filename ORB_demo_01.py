@@ -7,7 +7,7 @@ image_name = "beach_wood"
 image_ending = ".png"
 
 load_path = "data/load/"
-img = imageio.imread(load_path+image_name+image_ending)
+img = imageio.imread(load_path+image_name+image_ending, format="PNG-FI")
 
 # Initiate STAR detector
 orb = cv2.ORB_create()

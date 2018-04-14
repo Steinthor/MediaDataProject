@@ -1,0 +1,2 @@
+use this powershell command inside the folder with all pictures:
+ls - filter "pattern as regex" | copy-item -destination "absolute path"

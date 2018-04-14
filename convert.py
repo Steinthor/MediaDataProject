@@ -9,6 +9,7 @@
     To Do:
         1) Check for subprocess return-code?
         2) Better code reuse?
+        3) Check for PNG in doit().
 """
 
 from os import remove, path, listdir
@@ -29,7 +30,7 @@ class Convert:
     
     
     def doit(self):
-        """doit(compression_rates):
+        """doit():
         Converts a list of PNG files to different output formats:
             - JPEG
             - JPEG2000

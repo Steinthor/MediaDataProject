@@ -11,8 +11,8 @@
         2) Better code reuse?
         3) Check for PNG in doit().
 """
-
 from os import remove, path, listdir
+from time import time
 from subprocess import run
 from imageio import imread, imwrite
 from glymur import Jp2k
@@ -38,12 +38,25 @@ class Convert:
             - BPG
         """
         in_list = listdir(self.path_in)
+        current_time = time()
         for file in in_list:
-            self.convert_jpeg(file, self.compression_rates)
-            self.convert_jpeg2000(file, self.compression_rates)
-            self.convert_jpegxr(file, self.compression_rates)
-            self.convert_bpg(file, self.compression_rates)
-        return None
+            self.convert_all(file)
+        elapsed_time = time() - current_time
+        print('Elapsed time in seconds: ' + str(elapsed_time))
+    
+    
+    def convert_all(self, in_file):
+        """convert_all(in_file):
+        Converts a PNG file to different output formats:
+            - JPEG
+            - JPEG2000
+            - JPEG XR
+            - BPG
+        """
+        self.convert_jpeg(in_file, self.compression_rates)
+        self.convert_jpeg2000(in_file, self.compression_rates)
+        self.convert_jpegxr(in_file, self.compression_rates)
+        self.convert_bpg(in_file, self.compression_rates)
     
     
     def convert_jpeg(self, in_file, compression_rates):

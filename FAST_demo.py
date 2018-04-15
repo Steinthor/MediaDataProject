@@ -9,14 +9,11 @@ image_ending = ".png"
 load_path = "data/CoMoFoD/"
 img = imageio.imread(load_path+image_name+image_ending, format="PNG-FI")
 
-# Initiate STAR detector
-orb = cv2.ORB_create()
+# Initiate FAST detector
+fast = cv2.FastFeatureDetector_create()
 
-# find the keypoints with ORB
-kp = orb.detect(img, None)
-
-# compute the descriptors with ORB
-kp, des = orb.compute(img, kp)
+# find the keypoints with FAST
+kp = fast.detect(img, None)
 
 # draw only keypoints location,not size and orientation
 img2 = np.copy(img)

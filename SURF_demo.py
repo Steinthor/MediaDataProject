@@ -14,7 +14,7 @@ img_surf = cv2.drawKeypoints(img_test, kps, None, color=(0, 255, 0), flags=0)
 
 fig, axes = plt.subplots(1, 2)
 axes[0].imshow(img_test)
-axes[0].set_title('original')
+axes[0].set_title('original image')
 axes[0].axis('off')
 axes[1].imshow(img_surf)
 axes[1].set_title('with keypoints')

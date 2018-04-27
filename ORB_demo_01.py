@@ -2,6 +2,29 @@ import numpy as np
 import cv2
 import imageio
 from matplotlib import pyplot as plt
+from sklearn.cluster import KMeans
+
+def orb_detect (des):
+
+    temp = np.linalg.norm(des, axis=1)
+
+    temp.sort()
+
+    temp2 = np.diff(temp)
+    temp2.sort()
+
+    temp2 = np.reshape(temp2, (-1,1))
+    print( temp2 )
+    # Number of clusters
+    kmeans = KMeans(n_clusters=3)
+    # Fitting the input data
+    kmeans = kmeans.fit(temp2)
+    # Getting the cluster labels
+    labels = kmeans.predict(temp2)
+    # Centroid values
+    centroids = kmeans.cluster_centers_
+    print(centroids)  # From sci-kit learn
+
 
 image_name = "001_F"
 image_ending = ".png"
@@ -18,6 +41,9 @@ kp = orb.detect(img, None)
 # compute the descriptors with ORB
 kp, des = orb.compute(img, kp)
 
+orb_detect(des)
+
+"""
 # draw only keypoints location,not size and orientation
 img2 = np.copy(img)
 cv2.drawKeypoints(img, kp, img2, color=(0, 255, 0), flags=4)
@@ -30,3 +56,4 @@ axes[1].imshow(img2)
 axes[1].set_title('with keypoints')
 axes[1].axis('off')
 plt.show()
+"""

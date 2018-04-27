@@ -11,9 +11,15 @@ img = imageio.imread(load_path+image_name+image_ending, format="PNG-FI")
 
 # Initiate FAST detector
 fast = cv2.FastFeatureDetector_create()
+# Cause FAST is just a detector for keypoints
+# Additionally BRISK is used to get descriptors
+br = cv2.BRISK_create();
 
 # find the keypoints with FAST
 kp = fast.detect(img, None)
+
+# compute the descriptors with BRISK
+kp, des = br.compute(img,  kp)
 
 # draw only keypoints location,not size and orientation
 img2 = np.copy(img)

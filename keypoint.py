@@ -3,13 +3,13 @@
     Title:          Multimedia Data Formats
     Date:           27.04.2018
     Description:    Computes different keypoint descriptors (ORB, BRISK, SIFT, SURF)
-                    for image files (PNG, JPEG, JPEG2000, JPEG XR, BPG)
+                    for image files (PNG, JPEG, JPEG2000, JPEG XR, BPG).
                     
-    ToDo:
 """
+
 import cv2
 from imageio import imread
-from os import remove
+from os import remove, path
 from subprocess import run
 
 class Keypoint:
@@ -28,14 +28,22 @@ class Keypoint:
         Parameters:
             file:       Image filename including path.
         
-        Return:     Returns keypoints and corresponding descriptors.
+        Return:     Returns dictionary containing the ORB, BRISK, SIFT and SURF
+                    keypoint descriptors. Empty dictionary if error.
         """
         img = self.read_file(file)
-        orb_kp, orb_des = self.compute_ORB(img)
-        brisk_kp, brisk_des = self.compute_BRISK(img)
-        sift_kp, sift_des = self.compute_SIFT(img)
-        surf_kp, surf_des = self.compute_SURF(img)
-        return [orb_des, brisk_des, sift_des, surf_des]
+        if len(img) != 0:
+            orb_kp, orb_des = self.compute_ORB(img)
+            brisk_kp, brisk_des = self.compute_BRISK(img)
+            sift_kp, sift_des = self.compute_SIFT(img)
+            surf_kp, surf_des = self.compute_SURF(img)
+            descriptors = {'ORB': orb_des,
+                           'BRISK': brisk_des,
+                           'SIFT': sift_des,
+                           'SURF': surf_des}
+            return descriptors
+        else:
+            return {'ORB': [], 'BRISK': [], 'SIFT': [], 'SURF': []}
     
     
     def compute_ORB(self, img):
@@ -97,29 +105,44 @@ class Keypoint:
     def read_file(self, filename):
         """read_file(filename):
         Reads PNG, JPEG, JPEG2000, JPEG XR and BPG files.
-        Returns error if 
         
         Parameters:
             filename:   Filename including path.
         
-        Return:     Returns image array.
+        Return:     Returns image array. Empty array if error.
         """
-        check_format = filename.split('.')[2]
-        if check_format == 'png':
-            return imread(filename, format='PNG-FI')
-        elif check_format == 'jpeg':
-            return imread(filename, format='JPEG-FI')
-        elif check_format == 'jp2':
-            return imread(filename, format='JP2-FI')
-        elif check_format == 'jxr':
-            return imread(filename, format='JPEG-XR-FI')
-        elif check_format == 'bpg':
-            run([self.path_bpg, '-o', 'temp.png', filename])
-            img = imread('temp.png')
-            remove('temp.png')
-            return img
+        if self.check_file(filename) == True:
+            check_format = filename.split('.')[2]
+            if check_format == 'png':
+                return imread(filename, format='PNG-FI')
+            elif check_format == 'jpeg':
+                return imread(filename, format='JPEG-FI')
+            elif check_format == 'jp2':
+                return imread(filename, format='JP2-FI')
+            elif check_format == 'jxr':
+                return imread(filename, format='JPEG-XR-FI')
+            elif check_format == 'bpg':
+                run([self.path_bpg, '-o', 'temp.png', filename])
+                img = imread('temp.png')
+                remove('temp.png')
+                return img
+            else:
+                print('ERROR: File format/ending ' + check_format + ' not supported!')
+                return []
         else:
-            print('ERROR --> Not supported file format.')
-            return None
-    
+            print('ERROR: File ' + filename + ' not present!')
+            return []
+            
+        
+        
+    def check_file(self, filename):
+        """check_file(filename):
+        Checks if a file is present.
+        
+        Parameters:
+            filename:           Filename including path.
+        
+        Return:     Returns True if file is present, False otherwise.
+        """
+        return path.exists(filename)
     

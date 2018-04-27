@@ -31,8 +31,8 @@ class Keypoint:
         Return:     Returns descriptors containing the ORB, BRISK, SIFT and SURF
                     keypoint descriptors.
         """
-        if self.check_file(file) == True:
-            img = self.read_file(file)
+        img = self.read_file(file)
+        if len(img) != 0:
             orb_kp, orb_des = self.compute_ORB(img)
             brisk_kp, brisk_des = self.compute_BRISK(img)
             sift_kp, sift_des = self.compute_SIFT(img)
@@ -43,8 +43,7 @@ class Keypoint:
                            'SURF': surf_des}
             return descriptors
         else:
-            print('ERROR: File ' + file + ' not present!')
-            return None
+            return {'ORB': [], 'BRISK': [], 'SIFT': [], 'SURF': []}
     
     
     def compute_ORB(self, img):
@@ -113,23 +112,28 @@ class Keypoint:
         
         Return:     Returns image array.
         """
-        check_format = filename.split('.')[2]
-        if check_format == 'png':
-            return imread(filename, format='PNG-FI')
-        elif check_format == 'jpeg':
-            return imread(filename, format='JPEG-FI')
-        elif check_format == 'jp2':
-            return imread(filename, format='JP2-FI')
-        elif check_format == 'jxr':
-            return imread(filename, format='JPEG-XR-FI')
-        elif check_format == 'bpg':
-            run([self.path_bpg, '-o', 'temp.png', filename])
-            img = imread('temp.png')
-            remove('temp.png')
-            return img
+        if self.check_file(filename) == True:
+            check_format = filename.split('.')[2]
+            if check_format == 'png':
+                return imread(filename, format='PNG-FI')
+            elif check_format == 'jpeg':
+                return imread(filename, format='JPEG-FI')
+            elif check_format == 'jp2':
+                return imread(filename, format='JP2-FI')
+            elif check_format == 'jxr':
+                return imread(filename, format='JPEG-XR-FI')
+            elif check_format == 'bpg':
+                run([self.path_bpg, '-o', 'temp.png', filename])
+                img = imread('temp.png')
+                remove('temp.png')
+                return img
+            else:
+                print('ERROR: File format/ending ' + check_format + ' not supported!')
+                return []
         else:
-            print('ERROR: File format/ending ' + check_format + ' not supported!')
-            return None
+            print('ERROR: File ' + filename + ' not present!')
+            return []
+            
         
         
     def check_file(self, filename):
@@ -142,5 +146,4 @@ class Keypoint:
         Return:     Returns True if file is present, False otherwise.
         """
         return path.exists(filename)
-    
     

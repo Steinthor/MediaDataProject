@@ -4,41 +4,38 @@ import imageio
 from matplotlib import pyplot as plt
 from sklearn.cluster import KMeans
 
-def orb_detect (des):
 
-    for base in range(0): #des.shape[0]):
+def orb_detect(des):
+
+    temp_array = np.zeros((des.shape[0], des.shape[0], 1), dtype=np.float64)
+    # temp_array = np.zeros((4, 4, 1), dtype=np.float64)
+    for base in range(des.shape[0]):
         # the base descriptor is compared to the others
-        for other in range(des.shape[0]):
-            if base == other:
-                continue
-            else
-                temp = zeros(des.shape[1])
-                for i in range(des.shape[1]):
-                    #each number in the 'other' descriptor vector gets compared to base
-                    temp[i] = np.abs(des[base, i]-des[other, i]
+        for other in range(base+1, des.shape[0]):
+            for i in range(des.shape[1]):
+                #  number in the 'other' descriptor vector gets compared to base
+                temp_array[base, other] = temp_array[base, other] + (float(des[base, i]) - float(des[other, i]))**2
+            temp_array[base, other] = np.sqrt(temp_array[base, other])
+    temp_array = np.reshape(temp_array, (-1, 1))
+    temp_array.sort(axis=0)
+    temp_array = np.trim_zeros(temp_array)
+    print(temp_array)
+    diff_array = np.diff(temp_array, axis=0)
+    diff_array.sort(axis=0)
+    print(diff_array)
 
-
-
-    temp = np.diff(des)
-    temp = np.linalg.norm(temp, axis=1)
-
-    temp.sort()
-
-    temp2 = np.diff(temp)
-    temp2.sort()
-
-    temp2 = np.reshape(temp2, (-1,1))
-    print( temp2.shape )
     # Number of clusters
     kmeans = KMeans(n_clusters=3)
     # Fitting the input data
-    kmeans = kmeans.fit(temp2)
+    kmeans = kmeans.fit(diff_array)
     # Getting the cluster labels
-    labels = kmeans.predict(temp2)
+    labels = kmeans.predict(diff_array)
     # Centroid values
     centroids = kmeans.cluster_centers_
-    print(centroids[0])  # From sci-kit learn
-    #print(labels)
+    centroids.sort(axis=0)
+    print("centroids: ")
+    print(centroids)  # From sci-kit learn
+    # print(labels)
 
 
 image_name = "001_F"

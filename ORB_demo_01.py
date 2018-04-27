@@ -6,7 +6,21 @@ from sklearn.cluster import KMeans
 
 def orb_detect (des):
 
-    temp = np.linalg.norm(des, axis=1)
+    for base in range(0): #des.shape[0]):
+        # the base descriptor is compared to the others
+        for other in range(des.shape[0]):
+            if base == other:
+                continue
+            else
+                temp = zeros(des.shape[1])
+                for i in range(des.shape[1]):
+                    #each number in the 'other' descriptor vector gets compared to base
+                    temp[i] = 
+
+
+
+    temp = np.diff(des)
+    temp = np.linalg.norm(temp, axis=1)
 
     temp.sort()
 
@@ -14,7 +28,7 @@ def orb_detect (des):
     temp2.sort()
 
     temp2 = np.reshape(temp2, (-1,1))
-    print( temp2 )
+    print( temp2.shape )
     # Number of clusters
     kmeans = KMeans(n_clusters=3)
     # Fitting the input data
@@ -23,7 +37,8 @@ def orb_detect (des):
     labels = kmeans.predict(temp2)
     # Centroid values
     centroids = kmeans.cluster_centers_
-    print(centroids)  # From sci-kit learn
+    print(centroids[0])  # From sci-kit learn
+    #print(labels)
 
 
 image_name = "001_F"

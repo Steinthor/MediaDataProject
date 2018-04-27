@@ -15,7 +15,7 @@ def orb_detect (des):
                 temp = zeros(des.shape[1])
                 for i in range(des.shape[1]):
                     #each number in the 'other' descriptor vector gets compared to base
-                    temp[i] = 
+                    temp[i] = np.abs(des[base, i]-des[other, i]
 
 
 

@@ -2,6 +2,7 @@ import imageio
 import cv2
 import matplotlib.pyplot as plt
 
+#blabla
 image_name = "001_F"
 image_ending = ".png"
 

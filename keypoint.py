@@ -3,13 +3,13 @@
     Title:          Multimedia Data Formats
     Date:           27.04.2018
     Description:    Computes different keypoint descriptors (ORB, BRISK, SIFT, SURF)
-                    for image files (PNG, JPEG, JPEG2000, JPEG XR, BPG)
+                    for image files (PNG, JPEG, JPEG2000, JPEG XR, BPG).
                     
-    ToDo:
 """
+
 import cv2
 from imageio import imread
-from os import remove
+from os import remove, path
 from subprocess import run
 
 class Keypoint:
@@ -28,14 +28,23 @@ class Keypoint:
         Parameters:
             file:       Image filename including path.
         
-        Return:     Returns keypoints and corresponding descriptors.
+        Return:     Returns descriptors containing the ORB, BRISK, SIFT and SURF
+                    keypoint descriptors.
         """
-        img = self.read_file(file)
-        orb_kp, orb_des = self.compute_ORB(img)
-        brisk_kp, brisk_des = self.compute_BRISK(img)
-        sift_kp, sift_des = self.compute_SIFT(img)
-        surf_kp, surf_des = self.compute_SURF(img)
-        return [orb_des, brisk_des, sift_des, surf_des]
+        if self.check_file(file) == True:
+            img = self.read_file(file)
+            orb_kp, orb_des = self.compute_ORB(img)
+            brisk_kp, brisk_des = self.compute_BRISK(img)
+            sift_kp, sift_des = self.compute_SIFT(img)
+            surf_kp, surf_des = self.compute_SURF(img)
+            descriptors = {'ORB': orb_des,
+                           'BRISK': brisk_des,
+                           'SIFT': sift_des,
+                           'SURF': surf_des}
+            return descriptors
+        else:
+            print('ERROR: File ' + file + ' not present!')
+            return None
     
     
     def compute_ORB(self, img):
@@ -119,7 +128,19 @@ class Keypoint:
             remove('temp.png')
             return img
         else:
-            print('ERROR --> Not supported file format.')
+            print('ERROR: File format/ending ' + check_format + ' not supported!')
             return None
+        
+        
+    def check_file(self, filename):
+        """check_file(filename):
+        Checks if a file is present.
+        
+        Parameters:
+            filename:           Filename including path.
+        
+        Return:     Returns True if file is present, False otherwise.
+        """
+        return path.exists(filename)
     
     

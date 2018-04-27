@@ -28,8 +28,8 @@ class Keypoint:
         Parameters:
             file:       Image filename including path.
         
-        Return:     Returns descriptors containing the ORB, BRISK, SIFT and SURF
-                    keypoint descriptors.
+        Return:     Returns dictionary containing the ORB, BRISK, SIFT and SURF
+                    keypoint descriptors. Empty dictionary if error.
         """
         img = self.read_file(file)
         if len(img) != 0:
@@ -105,12 +105,11 @@ class Keypoint:
     def read_file(self, filename):
         """read_file(filename):
         Reads PNG, JPEG, JPEG2000, JPEG XR and BPG files.
-        Returns error if 
         
         Parameters:
             filename:   Filename including path.
         
-        Return:     Returns image array.
+        Return:     Returns image array. Empty array if error.
         """
         if self.check_file(filename) == True:
             check_format = filename.split('.')[2]

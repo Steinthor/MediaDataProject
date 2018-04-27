@@ -12,6 +12,8 @@ surf = cv2.xfeatures2d.SURF_create()
 (kps, descs) = surf.detectAndCompute(img_test, None)
 img_surf = cv2.drawKeypoints(img_test, kps, None, color=(0, 255, 0), flags=0)
 
+
+
 fig, axes = plt.subplots(1, 2)
 axes[0].imshow(img_test)
 axes[0].set_title('original image')

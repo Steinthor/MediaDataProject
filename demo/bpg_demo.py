@@ -17,11 +17,8 @@ path_bpg = './tools/libbpg/bpgenc.exe'
 img = imageio.imread(path_in + 'test_png.png', format='PNG-FI')
 img_size = img.size
 
-# Saving to BPG through command line tool libbpg
-
 result = subprocess.run([path_bpg, '-o', path_out + 'test.bpg', '-q', '28', '-m', '9', path_in + 'test_png.png'])
 print(result)
-
 
 c = Convert()
 c.convert_bpg('test_gross.png', [10, 20, 30])

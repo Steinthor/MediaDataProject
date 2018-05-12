@@ -106,7 +106,7 @@ class Convert:
         """convert_jpeg2000(in_list, compression_rates):
         Converts a file to JPEG2000 format for given compression_rates.
         (Uses JPEG2000 internal algorithm)
-        (Imput fomrat: PNG)
+        (Input format: PNG)
         
         Parameters:
             in_file:            Filename to convert.
@@ -161,7 +161,7 @@ class Convert:
                     print('--> ' + out_file)
                     success = True
                     break
-            if success == False:    # Stop if comression rate not reachable
+            if success == False:    # Stop if compression rate not reachable
                 remove(out_file)
                 break
         return out_list
@@ -199,7 +199,7 @@ class Convert:
                     print('--> ' + out_file)
                     success = True
                     break
-            if success == False:    # Stop if comression rate not reachable
+            if success == False:    # Stop if compression rate not reachable
                 remove(out_file)
                 break
         return out_list
@@ -239,5 +239,6 @@ class Convert:
         Return:     Returns filesize in bytes.
         """
         return path.getsize(filename)
-    
-    
+
+#test = Convert(path_infiles='./data/CoMoFoD/', path_outfiles='./data/converted/',compression_rates=[10, 20, 40])
+#test.doit()

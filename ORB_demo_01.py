@@ -35,7 +35,7 @@ def orb_detect(des):
     centroids.sort(axis=0)
     print("centroids: ")
     print(centroids)  # From sci-kit learn
-    # print(labels)
+    print(labels)
 
 
 image_name = "001_F"

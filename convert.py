@@ -240,5 +240,6 @@ class Convert:
         """
         return path.getsize(filename)
 
-#test = Convert(path_infiles='./data/CoMoFoD/', path_outfiles='./data/converted/',compression_rates=[10, 20, 40])
-#test.doit()
+
+test = Convert(path_infiles='./data/CoMoFoD/', path_outfiles='./data/converted/',compression_rates=[10, 20, 40])
+test.doit()

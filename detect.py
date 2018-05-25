@@ -30,7 +30,7 @@ class Detect:
         Detects a copy-move attack in a given file with these methods:
         - SURF
         """
-        self.detectSURF(keypoints['SURF'])
+        return self.detectSURF(keypoints['SURF'])
 
     def detectSURF(self, surf):
         """ detectSURF(img_file)

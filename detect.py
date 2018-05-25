@@ -6,11 +6,12 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.spatial import distance
+from keypoint import Keypoint
 
 class Detect:
 
-    def __init__(self, path_infiles='./data/converted/'):
-        self.path = path_infiles
+    def __init__(self):
+        return None
 
     def doit(self):
         """doit():
@@ -24,24 +25,26 @@ class Detect:
         elapsed_time = time() - current_time
         print('Elapsed time in seconds: ' + str(elapsed_time))
 
-    def detect_all(self, filename, extension):
+    def detect_all(self, keypoints):
         """detect_all(in_file):
         Detects a copy-move attack in a given file with these methods:
         - SURF
         """
-        self.detectSURF(filename, extension)
+        self.detectSURF(keypoints['SURF'])
 
-    def detectSURF(self, filename, extension):
+    def detectSURF(self, surf):
         """ detectSURF(img_file)
         detects a copy-move attack within a given filename
         """
         # img = self.loadImg(filename)
-        print(self.path + filename + extension)
-        img = self.load_img(filename, extension)
+        # print(self.path + filename + extension)
+        # img = self.load_img(filename, extension)
 
-        surf = cv2.xfeatures2d.SIFT_create()
-        (kps, descs) = surf.detectAndCompute(img, None)
-        img_surf = cv2.drawKeypoints(img, kps, None, color=(0, 255, 0), flags=0)
+        #surf = cv2.xfeatures2d.SIFT_create()
+        #(kps, descs) = surf.detectAndCompute(img, None)
+        #img_surf = cv2.drawKeypoints(img, kps, None, color=(0, 255, 0), flags=0)
+        kps = surf['keypoints']
+        descs = surf['descriptors']
 
         dist = np.empty([descs.shape[0], 2])
         cluster = np.zeros([descs.shape[0], 4])
@@ -142,8 +145,10 @@ class Detect:
 
         if countclust > 2:
             print("copy move attack detected")
+            return True
         else:
             print("no copy move attack detected")
+            return False
 
         # plt.imshow(img)
         # plt.show()
@@ -156,6 +161,3 @@ class Detect:
         else:
             img = imageio.imread(self.path + filename + extension)
         return img
-
-test = Detect()
-test.doit()

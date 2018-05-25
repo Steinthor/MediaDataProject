@@ -37,10 +37,10 @@ class Keypoint:
             brisk_kp, brisk_des = self.compute_BRISK(img)
             sift_kp, sift_des = self.compute_SIFT(img)
             surf_kp, surf_des = self.compute_SURF(img)
-            descriptors = {'ORB': orb_des,
-                           'BRISK': brisk_des,
-                           'SIFT': sift_des,
-                           'SURF': surf_des}
+            descriptors = {'ORB': {'keypoints': orb_kp, 'descriptors': orb_des},
+                           'BRISK': {'keypoints': brisk_kp, 'descriptors': brisk_des},
+                           'SIFT': {'keypoints': sift_kp, 'descriptors': sift_des},
+                           'SURF': {'keypoints': surf_kp, 'descriptors': surf_des}}
             return descriptors
         else:
             return {'ORB': [], 'BRISK': [], 'SIFT': [], 'SURF': []}

@@ -43,6 +43,7 @@ class Detect:
         #surf = cv2.xfeatures2d.SIFT_create()
         #(kps, descs) = surf.detectAndCompute(img, None)
         #img_surf = cv2.drawKeypoints(img, kps, None, color=(0, 255, 0), flags=0)
+        current_time = time()
         kps = surf['keypoints']
         descs = surf['descriptors']
 
@@ -90,6 +91,10 @@ class Detect:
         endc = c
         distT = 10
         distTT = 0
+
+        elapsed_time = time() - current_time
+        print('Elapsed time after finding distances: ' + str(elapsed_time))
+
         while distTT < distT:
             clustercomp = np.zeros([c, 2])
             for i in np.arange(c):
@@ -142,6 +147,9 @@ class Detect:
                     countelements = countelements + 1
             if countelements >= 4:
                 countclust = countclust + 1
+
+        elapsed_time = time() - current_time
+        print('Elapsed time after clustering: ' + str(elapsed_time))
 
         if countclust > 2:
             print("copy move attack detected")

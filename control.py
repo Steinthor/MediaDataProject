@@ -92,12 +92,12 @@ for file in in_list:
     if ratio not in result[fname][extension]:
         result[fname][extension][ratio] = {}
 
-    # keypoints = KP.compute_all(path_infiles+filename+extension)
+    keypoints = KP.compute_all(path_infiles+filename+extension)
 
     elapsed_time = time() - current_time
     print('current time, after keypoint detection: ' + str(elapsed_time))
 
-    result[fname][extension][ratio] = True  # DET.detect_all(keypoints)
+    result[fname][extension][ratio] = DET.detect_all(keypoints)
 
     elapsed_time = time() - current_time
     print('Current time, after copy/move attack detection: ' + str(elapsed_time))
@@ -114,4 +114,5 @@ test = load_obj('result00')
 dump(test)
 
 
-# use the data in each dictionary for analysis.
+# use the data for analysis.
+# probably better to use another python script for the analysis.

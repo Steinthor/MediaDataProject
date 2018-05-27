@@ -1,0 +1,227 @@
+Test 27.05.18 with 001_F and 001_O images : times and below is the dictionary
+
+current time, after keypoint detection: 0.37998199462890625
+(2577, 64)
+Elapsed time after finding distances: 97.84369397163391
+Elapsed time after clustering: 119.77904796600342
+copy move attack detected
+Current time, after copy/move attack detection: 120.15902996063232
+current time, after keypoint detection: 120.64872026443481
+(2556, 64)
+Elapsed time after finding distances: 96.01172733306885
+Elapsed time after clustering: 109.91852760314941
+no copy move attack detected
+Current time, after copy/move attack detection: 230.56724786758423
+current time, after keypoint detection: 231.05494356155396
+(2452, 64)
+Elapsed time after finding distances: 86.83535122871399
+Elapsed time after clustering: 102.74664235115051
+copy move attack detected
+Current time, after copy/move attack detection: 333.80158591270447
+current time, after keypoint detection: 334.2463583946228
+(2299, 64)
+Elapsed time after finding distances: 78.03812408447266
+Elapsed time after clustering: 87.44992446899414
+copy move attack detected
+Current time, after copy/move attack detection: 421.69628286361694
+current time, after keypoint detection: 422.092223405838
+(2690, 64)
+Elapsed time after finding distances: 106.7296793460846
+Elapsed time after clustering: 123.65535879135132
+copy move attack detected
+Current time, after copy/move attack detection: 545.7475821971893
+current time, after keypoint detection: 546.1205837726593
+(2622, 64)
+Elapsed time after finding distances: 101.53563237190247
+Elapsed time after clustering: 114.71834683418274
+copy move attack detected
+Current time, after copy/move attack detection: 660.838930606842
+current time, after keypoint detection: 661.2249007225037
+(2487, 64)
+Elapsed time after finding distances: 89.71651840209961
+Elapsed time after clustering: 106.50068020820618
+copy move attack detected
+Current time, after copy/move attack detection: 767.7255809307098
+current time, after keypoint detection: 768.0875754356384
+(2508, 64)
+Elapsed time after finding distances: 91.67269468307495
+Elapsed time after clustering: 108.0369040966034
+copy move attack detected
+Current time, after copy/move attack detection: 876.1244795322418
+current time, after keypoint detection: 876.4914994239807
+(2462, 64)
+Elapsed time after finding distances: 88.0567798614502
+Elapsed time after clustering: 98.20367765426636
+copy move attack detected
+Current time, after copy/move attack detection: 974.6951770782471
+current time, after keypoint detection: 975.0412261486053
+(2446, 64)
+Elapsed time after finding distances: 86.99605441093445
+Elapsed time after clustering: 101.29281902313232
+copy move attack detected
+Current time, after copy/move attack detection: 1076.3340451717377
+current time, after keypoint detection: 1076.713030576706
+(2612, 64)
+Elapsed time after finding distances: 100.12303566932678
+Elapsed time after clustering: 116.6797616481781
+copy move attack detected
+Current time, after copy/move attack detection: 1193.392792224884
+current time, after keypoint detection: 1193.7727501392365
+(2658, 64)
+Elapsed time after finding distances: 105.09187579154968
+Elapsed time after clustering: 117.2742428779602
+copy move attack detected
+Current time, after copy/move attack detection: 1311.0469930171967
+current time, after keypoint detection: 1311.4349308013916
+(2545, 64)
+Elapsed time after finding distances: 93.91793036460876
+Elapsed time after clustering: 102.38629269599915
+copy move attack detected
+Current time, after copy/move attack detection: 1413.8212234973907
+current time, after keypoint detection: 1414.1752343177795
+(2493, 64)
+Elapsed time after finding distances: 89.32246375083923
+Elapsed time after clustering: 106.41672158241272
+copy move attack detected
+Current time, after copy/move attack detection: 1520.5919559001923
+current time, after keypoint detection: 1521.1095776557922
+(2519, 64)
+Elapsed time after finding distances: 93.32979822158813
+Elapsed time after clustering: 109.97553038597107
+copy move attack detected
+Current time, after copy/move attack detection: 1631.0851080417633
+current time, after keypoint detection: 1631.5608360767365
+(2371, 64)
+Elapsed time after finding distances: 80.88743162155151
+Elapsed time after clustering: 93.17117810249329
+copy move attack detected
+Current time, after copy/move attack detection: 1724.7320141792297
+current time, after keypoint detection: 1725.1628217697144
+(2247, 64)
+Elapsed time after finding distances: 78.66168069839478
+Elapsed time after clustering: 87.49539613723755
+copy move attack detected
+Current time, after copy/move attack detection: 1812.659212589264
+current time, after keypoint detection: 1813.0591080188751
+(2587, 64)
+Elapsed time after finding distances: 98.48086786270142
+Elapsed time after clustering: 114.07917380332947
+no copy move attack detected
+Current time, after copy/move attack detection: 1927.1392586231232
+current time, after keypoint detection: 1927.5511198043823
+(2582, 64)
+Elapsed time after finding distances: 98.71796607971191
+Elapsed time after clustering: 111.68529677391052
+copy move attack detected
+Current time, after copy/move attack detection: 2039.2374532222748
+current time, after keypoint detection: 2039.6004421710968
+(2413, 64)
+Elapsed time after finding distances: 88.19040083885193
+Elapsed time after clustering: 99.10825681686401
+copy move attack detected
+Current time, after copy/move attack detection: 2138.709696531296
+current time, after keypoint detection: 2139.0557322502136
+(2449, 64)
+Elapsed time after finding distances: 91.05158138275146
+Elapsed time after clustering: 103.72572588920593
+copy move attack detected
+Current time, after copy/move attack detection: 2242.7814581394196
+current time, after keypoint detection: 2243.1444461345673
+(2398, 64)
+Elapsed time after finding distances: 86.64833426475525
+Elapsed time after clustering: 98.94237446784973
+copy move attack detected
+Current time, after copy/move attack detection: 2342.086820602417
+current time, after keypoint detection: 2342.439875602722
+(2381, 64)
+Elapsed time after finding distances: 82.95859217643738
+Elapsed time after clustering: 95.26878070831299
+copy move attack detected
+Current time, after copy/move attack detection: 2437.708656311035
+current time, after keypoint detection: 2438.079662799835
+(2526, 64)
+Elapsed time after finding distances: 94.94994831085205
+Elapsed time after clustering: 108.37591481208801
+copy move attack detected
+Current time, after copy/move attack detection: 2546.455577611923
+current time, after keypoint detection: 2546.8285813331604
+(2574, 64)
+Elapsed time after finding distances: 97.48413038253784
+Elapsed time after clustering: 108.74544525146484
+copy move attack detected
+Current time, after copy/move attack detection: 2655.5740265846252
+current time, after keypoint detection: 2655.938054561615
+(2474, 64)
+Elapsed time after finding distances: 87.76413774490356
+Elapsed time after clustering: 97.20698857307434
+copy move attack detected
+Current time, after copy/move attack detection: 2753.1460404396057
+Elapsed time in seconds: 2753.1460404396057
+{
+   001_F:
+   {
+      .png:
+      {
+         0: True
+      }
+      Fake: True
+      .bpg:
+      {
+         10: False
+         20: True
+         40: True
+      }
+      .jp2:
+      {
+         10: True
+         20: True
+         40: True
+      }
+      .jxr:
+      {
+         10: True
+         20: True
+         40: True
+      }
+      .jpeg:
+      {
+         10: True
+         20: True
+         40: True
+      }
+   }
+   001_O:
+   {
+      .png:
+      {
+         0: True
+      }
+      Fake: False
+      .bpg:
+      {
+         10: True
+         20: True
+         40: True
+      }
+      .jp2:
+      {
+         10: False
+         20: True
+         40: True
+      }
+      .jxr:
+      {
+         10: True
+         20: True
+         40: True
+      }
+      .jpeg:
+      {
+         10: True
+         20: True
+         40: True
+      }
+   }
+}
+
+Process finished with exit code 0

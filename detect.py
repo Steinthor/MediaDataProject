@@ -49,34 +49,18 @@ class Detect:
 
         Tr = 0.5    #treshold ratio
         Tc = 10     #threshold cluster
-        
-        dlist = descs.tolist()
-        dist = np.zeros([descs.shape[0], 1])
-        distlist = dist.tolist()
-        kddlist = list(zip(kps,dlist,distlist)) # keypoint, descriptor, distance list
-        
+
+        bf = cv2.BFMatcher()
+        kmatch = bf.knnMatch(descs, trainDescriptors=descs, k=3)
         cluster = list()
 
-        while len(kddlist) != 0:
-            tempcomp = kddlist.pop()
-            for i in np.arange(len(kddlist)):
-                kddlist[i] = (kddlist[i][0],kddlist[i][1], distance.euclidean(tempcomp[1], kddlist[i][1]))
-            kddlist.sort(key=lambda tup: tup[2])
-            k = 0
-            ratio = 0
-            while ratio < Tr:
-                if k+2 >= len(kddlist):
-                    break
-                ratio = kddlist[k][2]/kddlist[k+1][2]
-                k = k+1
-            if k > 1:
-                x = tempcomp[0].pt[0]
-                y = tempcomp[0].pt[1]
-                for j in np.arange(k-1):
-                    x = x + kddlist[0][0].pt[0]
-                    y = y + kddlist[0][0].pt[1]
-                    kddlist.pop(0)
-                cluster.append(([x/k,y/k],k,0))
+        for i in np.arange(len(kmatch)):
+            if kmatch[i][0] != 0:
+                if (kmatch[i][1].distance / kmatch[i][2].distance) < Tr:
+                    x = (kps[kmatch[i][1].queryIdx].pt[0] + kps[kmatch[i][1].trainIdx].pt[0]) / 2
+                    y = (kps[kmatch[i][1].queryIdx].pt[1] + kps[kmatch[i][1].trainIdx].pt[1]) / 2
+                    cluster.append(([x, y], 2, 0))
+                    kmatch[kmatch[i][1].trainIdx] = (0, 0, 0)
 
         elapsed_time = time() - current_time
         print('Elapsed time after finding distances: ' + str(elapsed_time))

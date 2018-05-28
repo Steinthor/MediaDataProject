@@ -5,8 +5,8 @@ import numpy as np
 from scipy.spatial import distance
 
 #blabla
-image_name = "002_F"
-image_ending = ".png"
+image_name = "test"
+image_ending = ".JPG"
 
 load_path = "data/CoMoFoD/"
 img_test = imageio.imread(load_path+image_name+image_ending)
@@ -23,31 +23,24 @@ dist = np.zeros([descs.shape[0], 1])
 distlist = dist.tolist()
 kddlist = list(zip(kps,dlist,distlist)) # keypoint, descriptor, distance list
 
-cluster = list()
 
 p = 0
 
 
-while len(kddlist) != 0:
-    tempcomp = kddlist.pop()
-    for i in np.arange(len(kddlist)):
-        kddlist[i] = (kddlist[i][0],kddlist[i][1], distance.euclidean(tempcomp[1], kddlist[i][1]))
-    kddlist.sort(key=lambda tup: tup[2])
-    k = 0
-    ratio = 0
-    while ratio < Tr:
-        if k+2 >= len(kddlist):
-            break
-        ratio = kddlist[k][2]/kddlist[k+1][2]
-        k = k+1
-    if k > 1:
-        x = tempcomp[0].pt[0]
-        y = tempcomp[0].pt[1]
-        for j in np.arange(k-1):
-            x = x + kddlist[0][0].pt[0]
-            y = y + kddlist[0][0].pt[1]
-            kddlist.pop(0)
-        cluster.append(([x/k,y/k],k,0))
+bf = cv2.BFMatcher()
+kmatch = bf.knnMatch(descs,trainDescriptors =descs,k=3)
+
+cluster = list()
+
+for i in np.arange(len(kmatch)):
+    if kmatch[i][0] !=0:
+        if (kmatch[i][1].distance/kmatch[i][2].distance) < Tr:
+            x = (kps[kmatch[i][1].queryIdx].pt[0] + kps[kmatch[i][1].trainIdx].pt[0])/2
+            y = (kps[kmatch[i][1].queryIdx].pt[1] + kps[kmatch[i][1].trainIdx].pt[1]) / 2
+            cluster.append(([x , y ], 2, 0))
+            kmatch[kmatch[i][1].trainIdx]= (0,0,0)
+
+
 
 mindist = (0,0,0)
 
@@ -65,6 +58,7 @@ while mindist[0] < Tc:
         new_x = (tempi[1] * tempi[0][0] + tempj[0][0] * tempj[1]) / new_k
         new_y = (tempi[1] * tempi[0][1] + tempj[0][1] * tempj[1]) / new_k
         cluster.append(([new_x,new_y], new_k, 0))
+
 
 clustercount = 0
 for i in np.arange(len(cluster)):

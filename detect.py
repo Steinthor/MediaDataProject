@@ -65,30 +65,30 @@ class Detect:
         elapsed_time = time() - current_time
         print('Elapsed time after finding distances: ' + str(elapsed_time))
 
-        found = True
+        mindist = (0, 0, 0)
+        clustercount = 0
 
-        while found:
-            found = False
+        while mindist[0] < Tc and clustercount < 2:
+            mindist = (Tc + 1, 0, 0)
+
             for i in np.arange(len(cluster)):
+
                 for j in np.arange(i):
                     tempdist = distance.euclidean(cluster[i][0], cluster[j][0])
-                    if tempdist < Tc:
-                        tempi = cluster.pop(i)
-                        tempj = cluster.pop(j)
-                        new_k = tempi[1] + tempj[1]
-                        new_x = (tempi[1] * tempi[0][0] + tempj[0][0] * tempj[1]) / new_k
-                        new_y = (tempi[1] * tempi[0][1] + tempj[0][1] * tempj[1]) / new_k
-                        cluster.append(([new_x,new_y], new_k, 0))
-                        found = True
-                        break
-                if found:
-                    break
-                
-        
-        clustercount = 0
-        for i in np.arange(len(cluster)):
-            if cluster[i][1] >= 4:
-                clustercount = clustercount +1
+
+                    if tempdist < mindist[0]:
+                          mindist = (tempdist, i, j)
+
+            if mindist[0] < Tc:
+                tempi = cluster.pop(mindist[1])
+                tempj = cluster.pop(mindist[2])
+                new_k = tempi[1] + tempj[1]
+                new_x = (tempi[1] * tempi[0][0] + tempj[0][0] * tempj[1]) / new_k
+                new_y = (tempi[1] * tempi[0][1] + tempj[0][1] * tempj[1]) / new_k
+                cluster.append(([new_x, new_y], new_k, 0))
+                if tempi[1] <= 3 and tempj[1] <= 3:
+                    clustercount = clustercount + 1
+
         
         if clustercount >= 2:
             print("copy move attack detected")

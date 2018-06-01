@@ -45,12 +45,12 @@ class Detect:
         # cluster the query keypoint with the nearest train keypoint.
         for i in np.arange(len(kmatch)):
             if kmatch[i][0] != 0:
-                if (kmatch[i][1].distance / kmatch[i][2].distance) < Tr:
+                if kmatch[i][1].distance == 0 or (kmatch[i][1].distance / kmatch[i][2].distance) < Tr:
                     # for the agglomerative hierarchical clustering we compare the distances between the centroid
                     # (the mean x and y coordinate of all keypoints of the cluster) from two cluster.
                     # therefore add the mean x and y coordinates and the number of cluster members to the cluster list
-                    x = (kps[kmatch[i][1].queryIdx].pt[0] + kps[kmatch[i][1].trainIdx].pt[0]) / 2
-                    y = (kps[kmatch[i][1].queryIdx].pt[1] + kps[kmatch[i][1].trainIdx].pt[1]) / 2
+                    x = (kps[kmatch[i][0].trainIdx].pt[0] + kps[kmatch[i][1].trainIdx].pt[0]) / 2
+                    y = (kps[kmatch[i][0].trainIdx].pt[1] + kps[kmatch[i][1].trainIdx].pt[1]) / 2
                     cluster.append(([x, y], 2, 0))
                     # to avoid duplicate cluster set the match result for the already added descriptor to zero
                     kmatch[kmatch[i][1].trainIdx] = (0, 0, 0)

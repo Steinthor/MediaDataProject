@@ -52,21 +52,21 @@ class Detect:
                     x = (kps[kmatch[i][1].queryIdx].pt[0] + kps[kmatch[i][1].trainIdx].pt[0]) / 2
                     y = (kps[kmatch[i][1].queryIdx].pt[1] + kps[kmatch[i][1].trainIdx].pt[1]) / 2
                     cluster.append(([x, y], 2, 0))
-                    # b
+                    # to avoid duplicate cluster set the match result for the already added descriptor to zero
                     kmatch[kmatch[i][1].trainIdx] = (0, 0, 0)
 
-
+        # agglomerative hierarchical clustering, merge the two nearest (distance between the centroids) if the distacne
+        # is less than the threshold Tc
+        # to store the actual minimum distance and the index of the according two cluster
         mindist = (0, 0, 0)
+        # store the number of cluster with more than 3 Keypoints
         clustercount = 0
-
+        # do the clustering until the minimum distance is greater than the threshold or more than 2 cluster has more than 3 Keypoints
         while mindist[0] < Tc and clustercount < 2:
             mindist = (Tc + 1, 0, 0)
-
             for i in np.arange(len(cluster)):
-
                 for j in np.arange(i):
                     tempdist = distance.euclidean(cluster[i][0], cluster[j][0])
-
                     if tempdist < mindist[0]:
                           mindist = (tempdist, i, j)
 
@@ -77,6 +77,7 @@ class Detect:
                 new_x = (tempi[1] * tempi[0][0] + tempj[0][0] * tempj[1]) / new_k
                 new_y = (tempi[1] * tempi[0][1] + tempj[0][1] * tempj[1]) / new_k
                 cluster.append(([new_x, new_y], new_k, 0))
+                # to avoid to increase the clustercount for cluster which already had more than 3 Keypoints
                 if tempi[1] <= 3 and tempj[1] <= 3:
                     clustercount = clustercount + 1
 
@@ -86,7 +87,6 @@ class Detect:
         else:
             # No detection
             return False
-            print("no copy move attack detected")
 
 
 

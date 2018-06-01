@@ -1,54 +1,35 @@
-import imageio
-from os import path, listdir
-from time import time
-import glymur
+# -*- coding: utf-8 -*-
+"""
+    Title:          Multimedia Data Formats
+    Date:           01.06.2018
+    Description:    
+"""
 import cv2
-import matplotlib.pyplot as plt
 import numpy as np
 from scipy.spatial import distance
-from keypoint import Keypoint
 
 class Detect:
 
     def __init__(self):
         return None
 
-    def doit(self):
-        """doit():
-        Detects a copy-move attack with all images in a given path
-        """
-        in_list = listdir(self.path)
-        current_time = time()
-        for file in in_list:
-            filename, extension = path.splitext(path.basename(file))
-            self.detect_all(filename, extension)
-        elapsed_time = time() - current_time
-        print('Elapsed time in seconds: ' + str(elapsed_time))
-
-    def detect_all(self, keypoints):
+    def detect_all(self, keypoint_descriptors):
         """detect_all(in_file):
         Detects a copy-move attack in a given file with these methods:
+        - SIFT (concentrate on those two for now)
         - SURF
         """
-        return self.detectSURF(keypoints['SURF'])
+        results = {'ORB': self.detect(keypoint_descriptors['ORB']),
+                   'BRISK': self.detect(keypoint_descriptors['BRISK']),
+                   'SIFT': self.detect(keypoint_descriptors['SIFT']),
+                   'SURF': self.detect(keypoint_descriptors['SURF'])}
+        return results
 
-    def detectSURF(self, surf):
+
+    def detect(self, kps, descs, Tr=0.5, Tc=10):
         """ detectSURF(img_file)
         detects a copy-move attack within a given filename
         """
-        # img = self.loadImg(filename)
-        # print(self.path + filename + extension)
-        # img = self.load_img(filename, extension)
-
-        #surf = cv2.xfeatures2d.SIFT_create()
-        #(kps, descs) = surf.detectAndCompute(img, None)
-        #img_surf = cv2.drawKeypoints(img, kps, None, color=(0, 255, 0), flags=0)
-        current_time = time()
-        kps = surf['keypoints']
-        descs = surf['descriptors']
-
-        Tr = 0.5    #treshold ratio
-        Tc = 10     #threshold cluster
 
         bf = cv2.BFMatcher()
         kmatch = bf.knnMatch(descs, trainDescriptors=descs, k=3)
@@ -62,8 +43,6 @@ class Detect:
                     cluster.append(([x, y], 2, 0))
                     kmatch[kmatch[i][1].trainIdx] = (0, 0, 0)
 
-        elapsed_time = time() - current_time
-        print('Elapsed time after finding distances: ' + str(elapsed_time))
 
         mindist = (0, 0, 0)
         clustercount = 0
@@ -89,25 +68,13 @@ class Detect:
                 if tempi[1] <= 3 and tempj[1] <= 3:
                     clustercount = clustercount + 1
 
-        
         if clustercount >= 2:
-            print("copy move attack detected")
+            # Copy move attack detected
+            return True
         else:
+            # No detection
+            return False
             print("no copy move attack detected")
 
-        elapsed_time = time() - current_time
-        print('Elapsed time after clustering: ' + str(elapsed_time))
 
-        
 
-        # plt.imshow(img)
-        # plt.show()
-
-    def load_img(self, filename, extension):
-        # need code to fix loading bpgs, import libbpg in some way..
-        if extension == ".jp2":
-            jp2 = glymur.Jp2k(self.path + filename + extension)
-            img = jp2[:]
-        else:
-            img = imageio.imread(self.path + filename + extension)
-        return img

@@ -24,7 +24,7 @@ class Convert:
     path_jpegxr = './tools/nconvert/nconvert.exe'
     path_bpg = './tools/libbpg/bpgenc.exe'
     
-    def __init__(self, path_infiles='./data/samples/', path_outfiles='./data/converted/', compression_rates=[1]):
+    def __init__(self, path_infiles='./data/load/', path_outfiles='./data/save/', compression_rates=([10, 20, 30, 40, 50, 60, 70, 80, 90])):
         self.path_in = path_infiles
         self.path_out = path_outfiles
         self.compression_rates = compression_rates
@@ -255,7 +255,7 @@ cr_small = [10, 20, 30, 40, 50, 60, 70]
 cr_large = [10, 20, 30, 40, 50, 60, 70, 80, 90]
 
 # CoMoFoD_small
-comofod_small = Convert(path_infiles='./data/CoMoFoD_small/', path_outfiles='./data/CoMoFoD_small_converted/', compression_rates=cr_small)
+comofod_small = Convert(path_infiles='./data/CoMoFoD_small/', path_outfiles='./data/CoMoFoD_small_converted/', compression_rates=cr_large)
 comofod_small.doit()
 # CoMoFoD_large
 #comofod_large = Convert(path_infiles='./data/CoMoFoD_large', path_outfiles='./data/converted/', compression_rates=cr_large)

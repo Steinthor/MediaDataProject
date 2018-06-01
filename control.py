@@ -20,7 +20,7 @@ def dump(dictionary):
 
 
 # Path to dataset
-path_infiles='./data/CoMoFoD_small/'
+path_infiles='./data/CoMoFoD_small_converted/'
 
 in_list = listdir(path_infiles)
 current_time = time()

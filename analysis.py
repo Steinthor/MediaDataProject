@@ -1,6 +1,7 @@
 import json
 import re
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def save_obj(dictionary, name):
@@ -19,7 +20,7 @@ def dump(dictionary):
 
 #  START OF ANALYSIS
 # load a dictionary from a file
-test = load_obj('result_2018_06_01__14_26_22')
+test = load_obj('result_2018_06_01__22_06_47')
 #dump(test)
 
 # we need to count true positives, fake positives and fake negatives
@@ -76,7 +77,7 @@ for file, f_dic in test.items():
 
                     anal1[c_scheme][detector][factor][result] = anal1[c_scheme][detector][factor][result] + 1
 
-dump(anal1)
+#dump(anal1)
 anal2 = {}
 for c, c_val in anal1.items():
     if c not in anal2:
@@ -101,14 +102,21 @@ for c, c_val in anal1.items():
                 F1 = 2 * p*r / (p+r)
                 anal2[c][d][f] = anal2[c][d][f] + F1
 
+
+fig, ax = plt.subplots()
+width = 0.2
+count = -2
+
 for data in anal2['.jpeg']:
 #data = anal2['.jpeg']['SIFT']
     names = list(anal2['.jpeg'][data].keys())
     values = list(anal2['.jpeg'][data].values())
-    plt.bar(range(0, 7), values, label=data, tick_label=names)
-    plt.xticks(range(0, 7), names)
+    plt.bar(np.arange(0, 9)+width*count, values, width, label=data, tick_label=names)
+    plt.xticks(range(0, 9), names)
+    count = count +1
 plt.xlabel("Compression factor")
 plt.ylabel("F1")
 plt.legend()
 #plt.savefig('fruit.png')
+plt.tight_layout()
 plt.show()

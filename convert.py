@@ -7,9 +7,10 @@
                     compressed files with different compression ratios.
                     
     To Do:
-        1) Check for subprocess return-code?
-        2) Better code reuse?
-        3) Check for PNG in doit().
+        1) Binary search approach
+        2) Check for subprocess return-code?
+        3) Better code reuse?
+        4) Check for PNG in doit().
 """
 from os import remove, path, listdir
 from time import time
@@ -241,5 +242,17 @@ class Convert:
         return path.getsize(filename)
 
 
-test = Convert(path_infiles='./data/CoMoFoD/', path_outfiles='./data/converted/',compression_rates=[10, 20, 40])
-test.doit()
+
+# Do convertion
+cr_small = [10, 20, 30, 40]
+cr_large = [10, 20, 30, 40, 50, 60, 70, 80]
+
+# CoMoFoD_small
+comofod_small = Convert(path_infiles='./data/CoMoFoD_small', path_outfiles='./data/converted/', compression_rates=cr_small)
+comofod_small.doit()
+# CoMoFoD_large
+comofod_large = Convert(path_infiles='./data/CoMoFoD_large', path_outfiles='./data/converted/', compression_rates=cr_large)
+comofod_large.doit()
+# TIFS
+tifs = Convert(path_infiles='./data/TIFS', path_outfiles='./data/converted/', compression_rates=cr_large)
+tifs.doit()

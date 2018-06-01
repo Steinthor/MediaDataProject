@@ -19,14 +19,14 @@ class Detect:
         - SIFT (concentrate on those two for now)
         - SURF
         """
-        results = {'ORB': self.detect(keypoint_descriptors['ORB']),
-                   'BRISK': self.detect(keypoint_descriptors['BRISK']),
-                   'SIFT': self.detect(keypoint_descriptors['SIFT']),
-                   'SURF': self.detect(keypoint_descriptors['SURF'])}
+        results = {'ORB': self.detect(keypoint_descriptors['ORB'], norm=cv2.NORM_HAMMING),
+                   'BRISK': self.detect(keypoint_descriptors['BRISK'], norm=cv2.NORM_HAMMING),
+                   'SIFT': self.detect(keypoint_descriptors['SIFT'], norm=cv2.NORM_L2),
+                   'SURF': self.detect(keypoint_descriptors['SURF'], norm=cv2.NORM_L2)}
         return results
 
 
-    def detect(self, keypoint_descriptors, Tr=0.5, Tc=10,norm= cv2.NORM_L2):
+    def detect(self, keypoint_descriptors, Tr=0.5, Tc=10, norm=cv2.NORM_L2):
         """ detectSURF(img_file)
         detects a copy-move attack within a given filename
         """

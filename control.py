@@ -68,6 +68,8 @@ for file in in_list:
     keypoints = KP.compute_all(path_infiles+filename+extension)
 
     elapsed_time = time() - current_time
+    
+    print(file)
     print('current time, after keypoint detection: ' + str(elapsed_time))
 
     result[fname][extension][ratio] = DET.detect_all(keypoints)

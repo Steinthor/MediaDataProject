@@ -54,12 +54,16 @@ class Convert:
             - JPEG XR
             - BPG
         """
+        self.copy_png(in_file)
         self.convert_jpeg(in_file, self.compression_rates)
         self.convert_jpeg2000(in_file, self.compression_rates)
         self.convert_jpegxr(in_file, self.compression_rates)
         self.convert_bpg(in_file, self.compression_rates)
     
-    
+    def copy_png(self, in_file):
+        msg = run('cp ' + self.path_in + in_file + ' ' + self.path_out + in_file)
+        print(msg)
+     
     def convert_jpeg(self, in_file, compression_rates):
         """convert_jpeg(in_file, compression_rates):
         Converts a file to JPEG format for given compression_rates.
@@ -248,11 +252,11 @@ cr_small = [10, 20, 30, 40]
 cr_large = [10, 20, 30, 40, 50, 60, 70, 80]
 
 # CoMoFoD_small
-comofod_small = Convert(path_infiles='./data/CoMoFoD_small', path_outfiles='./data/converted/', compression_rates=cr_small)
+comofod_small = Convert(path_infiles='./data/CoMoFoD_small/', path_outfiles='./data/CoMoFoD_small_converted/', compression_rates=cr_small)
 comofod_small.doit()
 # CoMoFoD_large
-comofod_large = Convert(path_infiles='./data/CoMoFoD_large', path_outfiles='./data/converted/', compression_rates=cr_large)
-comofod_large.doit()
+#comofod_large = Convert(path_infiles='./data/CoMoFoD_large', path_outfiles='./data/converted/', compression_rates=cr_large)
+#comofod_large.doit()
 # TIFS
-tifs = Convert(path_infiles='./data/TIFS', path_outfiles='./data/converted/', compression_rates=cr_large)
-tifs.doit()
+#tifs = Convert(path_infiles='./data/TIFS', path_outfiles='./data/converted/', compression_rates=cr_large)
+#tifs.doit()

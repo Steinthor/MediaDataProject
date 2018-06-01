@@ -10,9 +10,9 @@
         1) Binary search approach
         2) Check for subprocess return-code?
         3) Better code reuse?
-        4) Check for PNG in doit().
 """
 from os import remove, path, listdir
+from shutil import copy
 from time import time
 from subprocess import run
 from imageio import imread, imwrite
@@ -24,7 +24,7 @@ class Convert:
     path_jpegxr = './tools/nconvert/nconvert.exe'
     path_bpg = './tools/libbpg/bpgenc.exe'
     
-    def __init__(self, path_infiles='./data/CoMoFoD/', path_outfiles='./data/converted/', compression_rates=[1]):
+    def __init__(self, path_infiles='./data/samples/', path_outfiles='./data/converted/', compression_rates=[1]):
         self.path_in = path_infiles
         self.path_out = path_outfiles
         self.compression_rates = compression_rates
@@ -41,9 +41,12 @@ class Convert:
         in_list = listdir(self.path_in)
         current_time = time()
         for file in in_list:
-            self.convert_all(file)
+            if file.split('.')[1] == 'png':
+                self.convert_all(file)
+            else:
+                print("ERROR: No supported file format!")
         elapsed_time = time() - current_time
-        print('Elapsed time in seconds: ' + str(elapsed_time))
+        print('--> Elapsed time in seconds: ' + str(elapsed_time))
     
     
     def convert_all(self, in_file):
@@ -61,7 +64,7 @@ class Convert:
         self.convert_bpg(in_file, self.compression_rates)
     
     def copy_png(self, in_file):
-        msg = run('cp ' + self.path_in + in_file + ' ' + self.path_out + in_file)
+        msg = copy(self.path_in + in_file, self.path_out + in_file)
         print(msg)
      
     def convert_jpeg(self, in_file, compression_rates):
@@ -101,7 +104,7 @@ class Convert:
                     print('--> ' + out_file)
                     success = True
                     break
-            if success == False:    # Stop if comression rate not reachable
+            if success == False and qualities != []:    # Stop if comression rate not reachable
                 remove(out_file)
                 break
         return out_list
@@ -146,7 +149,7 @@ class Convert:
         Return:     Returns a list containing the filenames of the newly
                     converted files.
         """
-        qualities = list(reversed(range(-10, 101, 1)))    # quality range: [-10 100]
+        qualities = list(reversed(range(1, 101, 1)))    # quality range: [-10 100]
         img = imread(self.path_in + in_file, format='PNG-FI')
         in_size = self.get_imgsize(img)
         out_list = []
@@ -166,7 +169,7 @@ class Convert:
                     print('--> ' + out_file)
                     success = True
                     break
-            if success == False:    # Stop if compression rate not reachable
+            if success == False and qualities != []:    # Stop if compression rate not reachable
                 remove(out_file)
                 break
         return out_list
@@ -204,7 +207,7 @@ class Convert:
                     print('--> ' + out_file)
                     success = True
                     break
-            if success == False:    # Stop if compression rate not reachable
+            if success == False and qualities != []:    # Stop if compression rate not reachable
                 remove(out_file)
                 break
         return out_list
@@ -248,8 +251,8 @@ class Convert:
 
 
 # Do convertion
-cr_small = [10, 20, 30, 40]
-cr_large = [10, 20, 30, 40, 50, 60, 70, 80]
+cr_small = [10, 20, 30, 40, 50, 60, 70]
+cr_large = [10, 20, 30, 40, 50, 60, 70, 80, 90]
 
 # CoMoFoD_small
 comofod_small = Convert(path_infiles='./data/CoMoFoD_small/', path_outfiles='./data/CoMoFoD_small_converted/', compression_rates=cr_small)

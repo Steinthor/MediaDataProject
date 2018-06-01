@@ -1,53 +1,26 @@
-import imageio
 from os import path, listdir
 from time import time
-import glymur
-import cv2
-import matplotlib.pyplot as plt
-import numpy as np
-from scipy.spatial import distance
+from datetime import datetime
+import re
+import json
 from keypoint import Keypoint
 from detect import Detect
-import pickle
-import re
-import sys
 
-# Reference:
-# https://stackoverflow.com/questions/15785719/how-to-print-a-dictionary-line-by-line-in-python
-def dump(obj, nested_level=0, output=sys.stdout):
-    spacing = '   '
-    if type(obj) == dict:
-        print('%s{' % ((nested_level) * spacing))
-        for k, v in obj.items():
-            if hasattr(v, '__iter__'):
-                print('%s%s:' % ((nested_level + 1) * spacing, k))
-                dump(v, nested_level + 1, output)
-            else:
-                print('%s%s: %s' % ((nested_level + 1) * spacing, k, v))
-        print('%s}' % (nested_level * spacing))
-    elif type(obj) == list:
-        print('%s[' % ((nested_level) * spacing))
-        for v in obj:
-            if hasattr(v, '__iter__'):
-                dump(v, nested_level + 1, output)
-            else:
-                print('%s%s' % ((nested_level + 1) * spacing, v))
-        print('%s]' % ((nested_level) * spacing))
-    else:
-        print('%s%s' % (nested_level * spacing, obj))
 
-# Reference:
-# https://stackoverflow.com/questions/19201290/how-to-save-a-dictionary-to-a-file
-def save_obj(obj, name):
-    with open(name + '.dic', 'wb') as f:
-        pickle.dump(obj, f, protocol=0)
-
+def save_obj(dictionary, name):
+    with open(name + '.json', 'w') as f:
+        json.dump(dictionary, f, indent=4)
 
 def load_obj(name):
-    with open(name + '.dic', 'rb') as f:
-        return pickle.load(f)
+    with open(name + '.json', 'rb') as f:
+        return json.load(f)
+    
+def dump(dictionary):
+    print(json.dumps(dictionary, indent=4))
 
-path_infiles='./data/converted/'
+
+# Path to dataset
+path_infiles='./data/CoMoFoD_small/'
 
 in_list = listdir(path_infiles)
 current_time = time()
@@ -104,15 +77,7 @@ for file in in_list:
 
 elapsed_time = time() - current_time
 print('Elapsed time in seconds: ' + str(elapsed_time))
-# dump(result)
 
-# save the dictionary as a file
-save_obj(result, 'result00')
-
-# load a dictionary from a file
-test = load_obj('result00')
-dump(test)
-
-
-# use the data for analysis.
-# probably better to use another python script for the analysis.
+# Save data result data to file
+save_obj(result, 'result_{date:%Y_%m_%d__%H_%M_%S}'.format( date=datetime.now()))
+#dump(result)

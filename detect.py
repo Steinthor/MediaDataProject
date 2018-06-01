@@ -52,7 +52,7 @@ class Detect:
                     x = (kps[kmatch[i][1].queryIdx].pt[0] + kps[kmatch[i][1].trainIdx].pt[0]) / 2
                     y = (kps[kmatch[i][1].queryIdx].pt[1] + kps[kmatch[i][1].trainIdx].pt[1]) / 2
                     cluster.append(([x, y], 2, 0))
-                    #
+                    # b
                     kmatch[kmatch[i][1].trainIdx] = (0, 0, 0)
 
 

@@ -10,11 +10,6 @@
                     - OpenCV (SIFT)
                     
     To Do:
-        1) How to read BPG (maybe first decompress and convert to png?)
-        2) How to use command line tools from python (subprocess?)
-        3) Warning when writing with imageio
-            (WARNING:root:imageio.freeimage warning: Could not determine tag type of 'XMLPacket'.)
-        4) 
 """
 
 import cv2

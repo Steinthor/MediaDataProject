@@ -26,21 +26,33 @@ class Detect:
         return results
 
 
-    def detect(self, kps, descs, Tr=0.5, Tc=10):
+    def detect(self, keypoint_descriptors, Tr=0.5, Tc=10,norm= cv2.NORM_L2):
         """ detectSURF(img_file)
         detects a copy-move attack within a given filename
         """
+        kps = keypoint_descriptors['keypoints']
+        descs = keypoint_descriptors['descriptors']
 
-        bf = cv2.BFMatcher()
-        kmatch = bf.knnMatch(descs, trainDescriptors=descs, k=3)
+        # instantiation of the BruteForceMatcher class
+        bf = cv2.BFMatcher(norm)
+        # the knnMatch returns for each descriptor out of the queryDescriptors the k nearest (with respect to the used norm)
+        # descriptors out of the trainDescriptors
+        kmatch = bf.knnMatch(queryDescriptors=descs, trainDescriptors=descs, k=3)
+        # create the clusterlist, one entry represents one cluster and should contain the mean x and y coordinate
+        # of the cluster members, the number keypoints in this cluster and a placeholder for the later distance calculation.
         cluster = list()
-
+        # ratio test, if the ratio of the distance from the nearest over the second nearest descriptor is less than the threshold Tr
+        # cluster the query keypoint with the nearest train keypoint.
         for i in np.arange(len(kmatch)):
             if kmatch[i][0] != 0:
                 if (kmatch[i][1].distance / kmatch[i][2].distance) < Tr:
+                    # for the agglomerative hierarchical clustering we compare the distances between the centroid
+                    # (the mean x and y coordinate of all keypoints of the cluster) from two cluster.
+                    # therefore add the mean x and y coordinates and the number of cluster members to the cluster list
                     x = (kps[kmatch[i][1].queryIdx].pt[0] + kps[kmatch[i][1].trainIdx].pt[0]) / 2
                     y = (kps[kmatch[i][1].queryIdx].pt[1] + kps[kmatch[i][1].trainIdx].pt[1]) / 2
                     cluster.append(([x, y], 2, 0))
+                    #
                     kmatch[kmatch[i][1].trainIdx] = (0, 0, 0)
 
 

@@ -128,7 +128,7 @@ for c in anal2:
     plt.tight_layout()
     teljari = teljari + 1
 
-    x = np.arange(-1,9)
+    x = np.arange(-1, 9)
     y = x*0+0.66666
     plt.plot(x, y)
 #plt.savefig('metric.png')

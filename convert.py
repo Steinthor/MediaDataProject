@@ -1,14 +1,18 @@
 # -*- coding: utf-8 -*-
 """
     Title:          Multimedia Data Formats
-    Date:           14.04.2018
+    Date:           03.06.2018
     Description:    Convert-class containing all the methodes to convert 
                     a list of images into JPEG/JPEG2000/JPEG XR/BPG 
-                    compressed files with different compression ratios.
+                    compressed files with different compression ratios
+                    (using iterative, linear approach).
                     
     To Do:
         1) Binary search approach
         2) Check for subprocess return-code?
+            --> eg. BPG: CompletedProcess(args=['./tools/libbpg/bpgenc.exe', '-o', 'C:/Admin/CoMoFoD_small_converted/023_F_bpg_10.bpg', '-q', '11', '-m', '9', 'C:/Admin/CoMoFoD_small/023_F.png'], returncode=0)
+            --> eg. JXR: 
+            --> eg. JP2000: 
         3) Better code reuse?
 """
 from os import remove, path, listdir
@@ -197,6 +201,7 @@ class Convert:
             success = False
             for q in qualities:
                 msg = run([self.path_bpg, '-o', out_file, '-q', str(q), '-m', '9', self.path_in + in_file])
+                print(msg)
                 out_size = self.get_filesize(out_file)
                 rate =  in_size / out_size
                 print('(BPG) q=' + str(q) + ' | ratio=' + str(rate))
@@ -251,11 +256,11 @@ class Convert:
 
 
 # Do convertion
-cr_small = [10, 20, 30, 40, 50, 60, 70]
+cr_small = [10, 20, 30, 40, 50]
 cr_large = [10, 20, 30, 40, 50, 60, 70, 80, 90]
 
 # CoMoFoD_small
-comofod_small = Convert(path_infiles='./data/CoMoFoD_small/', path_outfiles='./data/CoMoFoD_small_converted/', compression_rates=cr_small)
+comofod_small = Convert(path_infiles='C:/Admin/CoMoFoD_small/', path_outfiles='C:/Admin/CoMoFoD_small_converted/', compression_rates=cr_small)
 comofod_small.doit()
 # CoMoFoD_large
 #comofod_large = Convert(path_infiles='./data/CoMoFoD_large', path_outfiles='./data/converted/', compression_rates=cr_large)

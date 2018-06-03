@@ -103,20 +103,33 @@ for c, c_val in anal1.items():
                 anal2[c][d][f] = anal2[c][d][f] + F1
 
 
-fig, ax = plt.subplots()
+fig = plt.figure()
+fig.suptitle("F1 Metric for different compression types at different ratios")
 width = 0.2
-count = -2
 
-for data in anal2['.jpeg']:
-#data = anal2['.jpeg']['SIFT']
-    names = list(anal2['.jpeg'][data].keys())
-    values = list(anal2['.jpeg'][data].values())
-    plt.bar(np.arange(0, 9)+width*count, values, width, label=data, tick_label=names)
-    plt.xticks(range(0, 9), names)
-    count = count +1
-plt.xlabel("Compression factor")
-plt.ylabel("F1")
-plt.legend()
-#plt.savefig('fruit.png')
-plt.tight_layout()
+teljari = 1
+
+comp = '.png'  # This is the compression scheme you want the F1 statistic for
+for c in anal2:
+    count = -2
+    ax = fig.add_subplot(3, 2, teljari)
+    for data in anal2[c]:
+    #data = anal2[comp]['SIFT']
+        names = list(anal2[c][data].keys())
+        values = list(anal2[c][data].values())
+        plt.bar(np.arange(0, values.__len__())+width*count, values, width, label=data, tick_label=names)
+        plt.xticks(range(0, values.__len__()), names)
+        count = count + 1
+    plt.xlabel("Compression factor")
+    plt.ylabel("F1 value")
+    plt.legend()
+    plt.title(c)
+
+    plt.tight_layout()
+    teljari = teljari + 1
+
+    x = np.arange(-1,9)
+    y = x*0+0.66666
+    plt.plot(x, y)
+#plt.savefig('metric.png')
 plt.show()

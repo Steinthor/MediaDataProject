@@ -10,17 +10,14 @@
     To Do:
         1) Binary search approach
         2) Check for subprocess return-code?
-            --> eg. BPG: CompletedProcess(args=['./tools/libbpg/bpgenc.exe', '-o', 'C:/Admin/CoMoFoD_small_converted/023_F_bpg_10.bpg', '-q', '11', '-m', '9', 'C:/Admin/CoMoFoD_small/023_F.png'], returncode=0)
-            --> eg. JXR: 
-            --> eg. JP2000: 
         3) Better code reuse?
 """
 from os import remove, path, listdir
 from shutil import copy
 from time import time
 from subprocess import run
-from imageio import imread, imwrite
 from glymur import Jp2k
+from cv2 import imwrite, imread, IMWRITE_JPEG_QUALITY, IMREAD_UNCHANGED
 
 class Convert:
        
@@ -50,7 +47,7 @@ class Convert:
             else:
                 print("ERROR: No supported file format!")
         elapsed_time = time() - current_time
-        print('--> Elapsed time in seconds: ' + str(elapsed_time))
+        print('--> CONVERT-DOIT: Elapsed time in seconds ' + str(elapsed_time))
     
     
     def convert_all(self, in_file):
@@ -60,6 +57,7 @@ class Convert:
             - JPEG2000
             - JPEG XR
             - BPG
+        Also copys the original PNG file to the output folder.
         """
         self.copy_png(in_file)
         self.convert_jpeg(in_file, self.compression_rates)
@@ -67,10 +65,17 @@ class Convert:
         self.convert_jpegxr(in_file, self.compression_rates)
         self.convert_bpg(in_file, self.compression_rates)
     
+    
     def copy_png(self, in_file):
-        msg = copy(self.path_in + in_file, self.path_out + in_file)
-        print(msg)
-     
+        """copy_png(in_file):
+        Copys the original input file (PNG format) to the output path.
+        
+        Parameters:
+            in_file:            Filename to copy.
+        """
+        copy(self.path_in + in_file, self.path_out + in_file)
+    
+         
     def convert_jpeg(self, in_file, compression_rates):
         """convert_jpeg(in_file, compression_rates):
         Converts a file to JPEG format for given compression_rates.
@@ -84,7 +89,7 @@ class Convert:
                     converted files.
         """
         qualities = list(reversed(range(1, 101, 1)))    # quality range: [1 100]
-        img = imread(self.path_in + in_file, format='PNG-FI')
+        img = imread(self.path_in + in_file, IMREAD_UNCHANGED)
         in_size = self.get_imgsize(img)
         out_list = []
         
@@ -93,10 +98,8 @@ class Convert:
             out_file = self.path_out + in_file.split('.')[0] + '_jpeg_' + str(r) + '.jpeg'
             success = False
             for q in qualities:
-                # Output options
-                args_jpeg = {"quality": q, "progressive": True, "optimize": True}
                 # Write file
-                imwrite(out_file, img, format='JPEG-PIL', **args_jpeg)
+                imwrite(out_file, img, [IMWRITE_JPEG_QUALITY, q])
                 out_size = self.get_filesize(out_file)
                 # Compare file size
                 rate =  in_size / out_size
@@ -110,6 +113,7 @@ class Convert:
                     break
             if success == False and qualities != []:    # Stop if comression rate not reachable
                 remove(out_file)
+                print('WARNING: Compressions not reachable ' + str(list(filter(lambda x: x >= r, compression_rates))))
                 break
         return out_list
     
@@ -127,14 +131,14 @@ class Convert:
         Return:     Returns a list containing the filenames of the newly
                     converted files.
         """
-        img = imread(self.path_in + in_file, format='PNG-FI')
+        img = imread(self.path_in + in_file, IMREAD_UNCHANGED)
         out_list = []
         
         # Conversion
         for r in compression_rates:
             args_jpeg2000 = {'cratios': [r]}
             out_file = self.path_out + in_file.split('.')[0] + '_jpeg2000_' + str(r) + '.jp2'
-            msg = Jp2k(out_file, img, **args_jpeg2000)
+            Jp2k(out_file, img, **args_jpeg2000)
             out_list.append(out_file)
             print('--> (JPEG2000) Success: rate=' + str(r))
             print('--> ' + out_file)
@@ -154,7 +158,7 @@ class Convert:
                     converted files.
         """
         qualities = list(reversed(range(1, 101, 1)))    # quality range: [-10 100]
-        img = imread(self.path_in + in_file, format='PNG-FI')
+        img = imread(self.path_in + in_file, IMREAD_UNCHANGED)
         in_size = self.get_imgsize(img)
         out_list = []
         
@@ -175,6 +179,7 @@ class Convert:
                     break
             if success == False and qualities != []:    # Stop if compression rate not reachable
                 remove(out_file)
+                print('WARNING: Compressions not reachable ' + str(list(filter(lambda x: x >= r, compression_rates))))
                 break
         return out_list
     
@@ -192,7 +197,7 @@ class Convert:
                     converted files.
         """
         qualities = list(range(0, 52, 1))               # quality range: [0 51]
-        img = imread(self.path_in + in_file, format='PNG-FI')
+        img = imread(self.path_in + in_file, IMREAD_UNCHANGED)
         in_size = self.get_imgsize(img)
         out_list = []
         
@@ -201,7 +206,6 @@ class Convert:
             success = False
             for q in qualities:
                 msg = run([self.path_bpg, '-o', out_file, '-q', str(q), '-m', '9', self.path_in + in_file])
-                print(msg)
                 out_size = self.get_filesize(out_file)
                 rate =  in_size / out_size
                 print('(BPG) q=' + str(q) + ' | ratio=' + str(rate))
@@ -214,6 +218,7 @@ class Convert:
                     break
             if success == False and qualities != []:    # Stop if compression rate not reachable
                 remove(out_file)
+                print('WARNING: Compressions not reachable ' + str(list(filter(lambda x: x >= r, compression_rates))))
                 break
         return out_list
     
@@ -255,15 +260,21 @@ class Convert:
 
 
 # Do convertion
+#path_small_in = 'C:/Admin/CoMoFoD_small/'
+#path_small_out = 'C:/Admin/CoMoFoD_small_converted/'
+path_small_in = './data/CoMoFoD_small/'
+path_small_out = './data/CoMoFoD_small_converted/'
+path_large_in = './data/Co/MoFod_large/'
+path_large_out = './data/Co/MoFod_large_converted/' 
 cr_small = [10, 20, 30, 40, 50]
 cr_large = [10, 20, 30, 40, 50, 60, 70, 80, 90]
 
 # CoMoFoD_small
-comofod_small = Convert(path_infiles='C:/Admin/CoMoFoD_small/', path_outfiles='C:/Admin/CoMoFoD_small_converted/', compression_rates=cr_small)
+comofod_small = Convert(path_infiles=path_small_in, path_outfiles=path_small_out, compression_rates=cr_small)
 comofod_small.doit()
 # CoMoFoD_large
-comofod_large = Convert(path_infiles='E:/Data analysis/C_large_sorted/', path_outfiles='E:/Data analysis/C_large/', compression_rates=cr_large)
-comofod_large.doit()
+#comofod_large = Convert(path_infiles=path_large_in, path_outfiles=path_large_out, compression_rates=cr_large)
+#comofod_large.doit()
 # TIFS
 #tifs = Convert(path_infiles='./data/TIFS', path_outfiles='./data/converted/', compression_rates=cr_large)
 #tifs.doit()

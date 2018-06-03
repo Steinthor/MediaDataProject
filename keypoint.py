@@ -11,6 +11,7 @@ import cv2
 from imageio import imread
 from os import remove, path
 from subprocess import run
+import re
 
 class Keypoint:
     
@@ -111,23 +112,23 @@ class Keypoint:
         
         Return:     Returns image array. Empty array if error.
         """
-        if self.check_file(filename) == True:
-            check_format = filename.split('.')[2]
-            if check_format == 'png':
+        if self.check_file(filename):
+            check_format = re.search(r'(?<=[.])\w+', filename)
+            if check_format.group(0) == 'png':
                 return imread(filename, format='PNG-FI')
-            elif check_format == 'jpeg':
+            elif check_format.group(0) == 'jpeg':
                 return imread(filename, format='JPEG-FI')
-            elif check_format == 'jp2':
+            elif check_format.group(0) == 'jp2':
                 return imread(filename, format='JP2-FI')
-            elif check_format == 'jxr':
+            elif check_format.group(0) == 'jxr':
                 return imread(filename, format='JPEG-XR-FI')
-            elif check_format == 'bpg':
+            elif check_format.group(0) == 'bpg':
                 run([self.path_bpg, '-o', 'temp.png', filename])
                 img = imread('temp.png')
                 remove('temp.png')
                 return img
             else:
-                print('ERROR: File format/ending ' + check_format + ' not supported!')
+                print('ERROR: File format/ending ' + check_format.group(0) + ' not supported!')
                 return []
         else:
             print('ERROR: File ' + filename + ' not present!')

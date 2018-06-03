@@ -249,17 +249,16 @@ class Convert:
         return path.getsize(filename)
 
 
-
 # Do convertion
 cr_small = [10, 20, 30, 40, 50, 60, 70]
 cr_large = [10, 20, 30, 40, 50, 60, 70, 80, 90]
 
 # CoMoFoD_small
-comofod_small = Convert(path_infiles='./data/CoMoFoD_small/', path_outfiles='./data/CoMoFoD_small_converted/', compression_rates=cr_large)
-comofod_small.doit()
+#comofod_small = Convert(path_infiles='E:/Data analysis/C_small_sorted/', path_outfiles='E:/Data analysis/C_small/', compression_rates=cr_large)
+#comofod_small.doit()
 # CoMoFoD_large
-#comofod_large = Convert(path_infiles='./data/CoMoFoD_large', path_outfiles='./data/converted/', compression_rates=cr_large)
-#comofod_large.doit()
+comofod_large = Convert(path_infiles='E:/Data analysis/C_large_sorted/', path_outfiles='E:/Data analysis/C_large/', compression_rates=cr_large)
+comofod_large.doit()
 # TIFS
 #tifs = Convert(path_infiles='./data/TIFS', path_outfiles='./data/converted/', compression_rates=cr_large)
 #tifs.doit()

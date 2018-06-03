@@ -20,7 +20,7 @@ def dump(dictionary):
 
 #  START OF ANALYSIS
 # load a dictionary from a file
-test = load_obj('result_2018_06_01__22_06_47')
+test = load_obj('result_2018_06_03__03_56_03')
 #dump(test)
 
 # we need to count true positives, fake positives and fake negatives

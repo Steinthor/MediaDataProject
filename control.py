@@ -20,7 +20,7 @@ def dump(dictionary):
 
 
 # Path to dataset
-path_infiles='./data/CoMoFoD_small_converted/'
+path_infiles='E:/Data analysis/C_small/'
 
 in_list = listdir(path_infiles)
 current_time = time()
@@ -82,4 +82,4 @@ print('Elapsed time in seconds: ' + str(elapsed_time))
 
 # Save data result data to file
 save_obj(result, 'result_{date:%Y_%m_%d__%H_%M_%S}'.format( date=datetime.now()))
-#dump(result)
+dump(result)

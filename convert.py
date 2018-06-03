@@ -259,13 +259,8 @@ cr_small = [10, 20, 30, 40, 50]
 cr_large = [10, 20, 30, 40, 50, 60, 70, 80, 90]
 
 # CoMoFoD_small
-<<<<<<< HEAD
 comofod_small = Convert(path_infiles='C:/Admin/CoMoFoD_small/', path_outfiles='C:/Admin/CoMoFoD_small_converted/', compression_rates=cr_small)
 comofod_small.doit()
-=======
-#comofod_small = Convert(path_infiles='E:/Data analysis/C_small_sorted/', path_outfiles='E:/Data analysis/C_small/', compression_rates=cr_large)
-#comofod_small.doit()
->>>>>>> 42dd5404d98417423d13f8a0b73ccb70a887b40e
 # CoMoFoD_large
 comofod_large = Convert(path_infiles='E:/Data analysis/C_large_sorted/', path_outfiles='E:/Data analysis/C_large/', compression_rates=cr_large)
 comofod_large.doit()

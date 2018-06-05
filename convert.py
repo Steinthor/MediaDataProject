@@ -254,18 +254,21 @@ class Convert:
         Parameters:
             filename:           Filename including path.
         
-        Return:     Returns filesize in bytes.
+        Return:     Returns filesize in bytes. 
         """
         return path.getsize(filename)
 
 
 # Do convertion
-#path_small_in = 'C:/Admin/CoMoFoD_small/'
-#path_small_out = 'C:/Admin/CoMoFoD_small_converted/'
-path_small_in = './data/CoMoFoD_small/'
-path_small_out = './data/CoMoFoD_small_converted/'
-path_large_in = './data/Co/MoFod_large/'
-path_large_out = './data/Co/MoFod_large_converted/' 
+path_small_in = 'C:/Admin/CoMoFoD_small/'
+path_small_out = 'C:/Admin/CoMoFoD_small_converted/'
+#path_small_in = './data/CoMoFoD_small/'
+#path_small_out = './data/CoMoFoD_small_converted/'
+        
+path_large_in = 'C:/Admin/CoMoFoD_large/'
+path_large_out = 'C:/Admin/CoMoFoD_large_converted/'
+#path_large_in = './data/CoMoFod_large/'
+#path_large_out = './data/CoMoFod_large_converted/' 
 cr_small = [10, 20, 30, 40, 50]
 cr_large = [10, 20, 30, 40, 50, 60, 70, 80, 90]
 
@@ -273,8 +276,7 @@ cr_large = [10, 20, 30, 40, 50, 60, 70, 80, 90]
 comofod_small = Convert(path_infiles=path_small_in, path_outfiles=path_small_out, compression_rates=cr_small)
 comofod_small.doit()
 # CoMoFoD_large
-#comofod_large = Convert(path_infiles=path_large_in, path_outfiles=path_large_out, compression_rates=cr_large)
-#comofod_large.doit()
-# TIFS
-#tifs = Convert(path_infiles='./data/TIFS', path_outfiles='./data/converted/', compression_rates=cr_large)
-#tifs.doit()
+comofod_large = Convert(path_infiles=path_large_in, path_outfiles=path_large_out, compression_rates=cr_large)
+comofod_large.doit()
+
+#--> CONVERT-DOIT: Elapsed time in seconds 28922.651940107346 (SMALL)

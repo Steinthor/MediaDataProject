@@ -21,9 +21,7 @@ def dump(dictionary):
 
 # Path to dataset
 
-path_infiles='./data/CoMoFoD_small_converted/'
-path_infiles='E:/Data analysis/C_small/'
-
+path_infiles='./data/CoMoFoD_small/'
 
 in_list = listdir(path_infiles)
 current_time = time()

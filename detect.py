@@ -19,10 +19,10 @@ class Detect:
         - SIFT (concentrate on those two for now)
         - SURF
         """
-        results = {'ORB': self.detect(keypoint_descriptors['ORB'], norm=cv2.NORM_HAMMING),
-                   'BRISK': self.detect(keypoint_descriptors['BRISK'], norm=cv2.NORM_HAMMING),
-                   'SIFT': self.detect(keypoint_descriptors['SIFT'], norm=cv2.NORM_L2),
-                   'SURF': self.detect(keypoint_descriptors['SURF'], norm=cv2.NORM_L2)}
+        results = {'ORB': self.detect(keypoint_descriptors['ORB'],Tr=0.7,Tc=12, norm=cv2.NORM_HAMMING),
+                   'BRISK': self.detect(keypoint_descriptors['BRISK'],Tr=0.55,Tc=3, norm=cv2.NORM_HAMMING),
+                   'SIFT': self.detect(keypoint_descriptors['SIFT'],Tr=0.4,Tc=10, norm=cv2.NORM_L2),
+                   'SURF': self.detect(keypoint_descriptors['SURF'],Tr=0.4,Tc=11, norm=cv2.NORM_L2)}
         return results
 
 

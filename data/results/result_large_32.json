@@ -1,0 +1,388 @@
+{
+    "32_F": {
+        ".png": {
+            "0": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            }
+        },
+        "Fake": true,
+        ".bpg": {
+            "10": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "20": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "30": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "40": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "50": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "60": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "70": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "80": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "90": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            }
+        },
+        ".jp2": {
+            "10": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "20": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "30": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "40": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "50": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "60": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "70": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "80": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "90": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            }
+        },
+        ".jxr": {
+            "10": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "20": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            }
+        },
+        ".jpeg": {
+            "10": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "20": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "30": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "40": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "50": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "60": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "70": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "80": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "90": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            }
+        }
+    },
+    "32_O": {
+        ".png": {
+            "0": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            }
+        },
+        "Fake": false,
+        ".bpg": {
+            "10": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "20": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "30": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "40": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "50": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "60": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "70": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "80": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "90": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            }
+        },
+        ".jp2": {
+            "10": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "20": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "30": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "40": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "50": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "60": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "70": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "80": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "90": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            }
+        },
+        ".jxr": {
+            "10": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "20": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            }
+        },
+        ".jpeg": {
+            "10": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "20": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "30": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "40": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "50": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "60": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "70": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "80": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            },
+            "90": {
+                "ORB": true,
+                "BRISK": true,
+                "SIFT": true,
+                "SURF": true
+            }
+        }
+    }
+}

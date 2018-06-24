@@ -126,7 +126,7 @@ comp = '.png'  # This is the compression scheme you want the F1 statistic for
 for c in anal2:
     count = -2
     ax = fig.add_subplot(3, 2, teljari)
-    KP_string = 'SIFT' # 'ORB' , 'BRISK' , 'SIFT' , 'SURF'
+    KP_string = 'SURF' # 'ORB' , 'BRISK' , 'SIFT' , 'SURF'
     names = list(anal2[c][KP_string].keys())
     values = list(anal2[c][KP_string].values())
     plt.plot(np.arange(0, values.__len__()), values, marker='o')

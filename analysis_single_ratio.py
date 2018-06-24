@@ -20,7 +20,7 @@ def dump(dictionary):
 
 #  START OF ANALYSIS
 # load all large image dictionary from a directory
-test = load_obj('./data/results/comofod_small_2018_06_13__10_14_55')
+test = load_obj('./data/results/large_collection')
 #dump(test)
 
 # we need to count true positives, fake positives and fake negatives

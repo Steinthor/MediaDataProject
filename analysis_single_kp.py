@@ -114,7 +114,7 @@ for c, c_val in anal1.items():
 
 
 fig = plt.figure()
-fig.suptitle("F1 Metric for SIFT keypoints for different compression schemes and different ratios.")
+
 width = 0.2
 
 print("Tp : {0}, Tn : {1}, Fp : {2}, Fn : {3}".format(Tp_sum, Tn_sum, Fp_sum, Fn_sum))
@@ -146,4 +146,5 @@ for c in anal2:
     y = x*0+0.66666
     plt.plot(x, y)
 #plt.savefig('metric.png')
+fig.suptitle("F1 Metric for " + KP_string + " keypoints for different compression schemes and different ratios.")
 plt.show()
